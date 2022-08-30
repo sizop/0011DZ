@@ -121,7 +121,7 @@ Console.WriteLine($"Номер строки с наименьшей суммой
 // Результирующая матрица будет:
 // 18 20
 // 15 18
-
+/*
 int[,] GetArray(int m, int n) //Метод ввод массива
 {
 	int[,] matrix = new int[m, n];
@@ -160,26 +160,7 @@ PrintArray(matrix2); Console.WriteLine();
 
 Console.WriteLine("Результирующий массив");
 PrintArray(matrixResult);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*/
 
 // Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся 
 // двузначных чисел. Напишите программу, которая будет построчно 
@@ -190,6 +171,38 @@ PrintArray(matrixResult);
 // 27(0,0,1) 90(0,1,1)
 // 26(1,0,1) 55(1,1,1)
 
+/*
+int c = 10;
+int[,,] GetArray(int k, int l, int m) //Метод ввод трехмерного массива
+{
+	int[,,] matrix = new int[k, l, m];
+	for (int i = 0; i < matrix.GetLength(0); i++)
+	{
+		for (int j = 0; j < matrix.GetLength(1); j++)
+		{
+			for (int n = 0; n < matrix.GetLength(2); n++)
+			{
+				c++; matrix[i, j, n] = (c);
+			}
+		}
+	}
+	return matrix;
+}
+int[,,] matrix = GetArray(3, 3, 3);
+
+for (int i = 0; i < matrix.GetLength(0); i++) //Вывод трехмерного массива
+{
+	for (int j = 0; j < matrix.GetLength(1); j++)
+	{
+		for (int n = 0; n < matrix.GetLength(2); n++)
+		{
+			Console.Write((matrix[i, j, n]) + " (" + (i) + "," + (j)
+			 + "," + (n) + ",)" + "\t");
+		}
+		Console.WriteLine();
+	}
+}
+*/
 
 // Задача 62. Напишите программу, которая заполнит спирально 
 // массив 4 на 4.
@@ -198,3 +211,41 @@ PrintArray(matrixResult);
 // 12 13 14 05
 // 11 16 15 06
 // 10 09 08 07
+
+//ЗАДАЧА НЕ РЕШЕНА!
+// Нашел готовое решение для разбора кода.
+
+int[,] GetArray(int n)
+{
+	var result = new int[n, n];
+	for (int currentChar = 1, padding = 0; padding < n / 2; padding++)
+	{
+		for (int j = padding; j < n - padding; j++)
+			result[padding, j] = currentChar;
+		for (int j = padding; j < n - padding; j++)
+			result[n - padding - 1, j] = currentChar;
+		for (int i = padding + 2; i < n - padding - 1; i++)
+			result[i, padding] = currentChar;
+		for (int i = padding + 1; i < n - padding - 1; i++)
+			result[i, n - padding - 1] = currentChar;
+		currentChar = 1 - currentChar;
+		result[padding + 1, padding] = currentChar;
+	}
+	if (n % 2 != 0 && result[0, 0] == 1)
+		result[n / 2, n / 2] = 1;
+	return result;
+}
+
+void PrintArray(int[,] matrix) //Метод печать массива
+
+{
+	for (int i = 0; i < matrix.GetLength(0); i++)
+	{
+		for (int j = 0; j < matrix.GetLength(1); j++)
+		{ Console.Write(matrix[i, j] + "\t"); }
+		Console.WriteLine();
+	}
+}
+
+int[,] matrix = GetArray(4);
+PrintArray(matrix);
